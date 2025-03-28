@@ -1,0 +1,12 @@
+{
+  "name": "github-user-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx live-server src"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": []
+}

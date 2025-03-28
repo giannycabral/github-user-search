@@ -1,0 +1,1181 @@
+/* Variáveis globais */
+:root {
+    --bg-primary: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    --bg-secondary: rgba(22, 27, 34, 0.95);
+    --text-primary: #ffffff;
+    --text-secondary: #8b949e;
+    --accent-color: #58a6ff;
+    --accent-gradient: linear-gradient(45deg, #58a6ff, #ff3366);
+    --border-color: #30363d;
+    --button-bg: linear-gradient(45deg, #238636, #2ea043);
+    --input-bg: rgba(13, 17, 23, 0.8);
+    --card-bg: rgba(22, 27, 34, 0.9);
+    --success-color: #238636;
+    --error-color: #f85149;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Reset e estilos base */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Ajuste do background do body */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background:
+        linear-gradient(120deg, #000000 0%, #0a192f 100%),
+        repeating-linear-gradient(60deg,
+            rgba(88, 166, 255, 0.05) 0%,
+            rgba(88, 166, 255, 0.05) 1px,
+            transparent 1px,
+            transparent 15px);
+    background-attachment: fixed;
+    position: relative;
+    margin: 0;
+    padding: 20px;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Efeito de brilho no background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(88, 166, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 51, 102, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+    animation: glowShift 15s infinite alternate;
+}
+
+/* Efeito de partículas flutuantes */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(88, 166, 255, 0.1) 0%, transparent 1%),
+        radial-gradient(circle at 30% 70%, rgba(255, 51, 102, 0.1) 0%, transparent 1%);
+    background-size: 50px 50px;
+    animation: particleFloat 20s infinite linear;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* Animações do background */
+@keyframes glowShift {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100px 100px;
+    }
+}
+
+/* Efeito de grade sutil */
+.grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Container principal */
+.container {
+    width: 100%;
+    max-width: 500px;
+    /* Reduzido de 600px */
+    margin: auto;
+    background: var(--bg-secondary);
+    padding: 30px;
+    /* Reduzido de 40px */
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow:
+        0 12px 40px var(--shadow-color),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    background: rgba(22, 27, 34, 0.98);
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 0 60px rgba(88, 166, 255, 0.1);
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.header i {
+    font-size: 48px;
+    color: var(--accent-color);
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.header i::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
+    background: radial-gradient(circle at center, rgba(88, 166, 255, 0.2) 0%, transparent 70%);
+    z-index: -1;
+    animation: glowPulse 2s infinite;
+}
+
+.header h1 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 2.5em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Formulário de busca */
+.search-box {
+    display: flex;
+    gap: 15px;
+    margin: 0 auto 30px;
+    justify-content: center;
+    max-width: 500px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 15px 20px;
+    background: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 16px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.25);
+    transform: scale(1.02);
+}
+
+/* Botões */
+button {
+    background: var(--button-bg);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 15px rgba(46, 160, 67, 0.4),
+        0 0 0 2px rgba(46, 160, 67, 0.2);
+    background: linear-gradient(45deg, #2ea043, #3fb950);
+}
+
+/* Estilo da mensagem de erro */
+.error-message {
+    color: #f85149;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(248, 81, 73, 0.1);
+    animation: shake 0.5s ease;
+}
+
+/* Container do resultado com layout atualizado */
+#result {
+    margin: 30px auto;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px var(--shadow-color);
+    animation: slideUp 0.5s ease forwards;
+}
+
+/* Layout do perfil */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Ajustes na imagem de perfil */
+#result img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container da imagem */
+.profile-img-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+/* Responsividade da imagem */
+@media (max-width: 768px) {
+
+    #result img,
+    .profile-img-container {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #result img,
+    .profile-img-container {
+        width: 100px;
+        height: 100px;
+        border-width: 3px;
+    }
+}
+
+@media (max-width: 360px) {
+
+    #result img,
+    .profile-img-container {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    #result img,
+    .profile-img-container {
+        width: 180px;
+        height: 180px;
+        border-width: 5px;
+    }
+}
+
+.profile-info {
+    text-align: left;
+    flex: 1;
+}
+
+/* Stats no layout horizontal */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    background: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.1));
+    border-radius: 12px;
+    padding: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #result {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    #result img {
+        width: 100px;
+        height: 100px;
+    }
+
+    #result img {
+        margin: 0 auto;
+    }
+
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .profile-header {
+        gap: 15px;
+    }
+
+    #result img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .octocat-container {
+        top: unset;
+        bottom: -60px;
+        right: 20px;
+        transform: none;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #result img,
+    .profile-img-container {
+        width: 90px;
+        height: 90px;
+        border-width: 3px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    #result img {
+        margin: 0 auto;
+    }
+
+    .profile-info {
+        text-align: center;
+    }
+
+    .octocat-container {
+        bottom: -40px;
+        right: 10px;
+    }
+
+    .octocat {
+        width: 60px;
+    }
+}
+
+@media (max-width: 360px) {
+
+    #result img,
+    .profile-img-container {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* Stats */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    background: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.1));
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    background: rgba(22, 27, 34, 0.95);
+}
+
+.stat-item {
+    padding: 15px;
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+
+/* Octocat */
+.octocat-container {
+    position: absolute;
+    top: -50px;
+    right: -40px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.octocat {
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    height: auto;
+    transform-origin: bottom center;
+}
+
+/* Ajustes responsivos para o Octocat */
+@media (min-width: 1200px) {
+    .octocat-container {
+        top: -60px;
+        right: -50px;
+    }
+
+    .octocat {
+        width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .octocat-container {
+        top: -40px;
+        right: -30px;
+    }
+
+    .octocat {
+        width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .octocat-container {
+        top: -35px;
+        right: -25px;
+    }
+
+    .octocat {
+        width: 70px;
+    }
+}
+
+@media (max-width: 360px) {
+    .octocat-container {
+        top: -30px;
+        right: -20px;
+    }
+
+    .octocat {
+        width: 60px;
+    }
+}
+
+/* Ajuste para visualização em paisagem */
+@media (max-height: 500px) and (orientation: landscape) {
+    .octocat-container {
+        top: -35px;
+        right: -25px;
+    }
+
+    .octocat {
+        width: 70px;
+    }
+}
+
+/* Animações do Octocat */
+@keyframes walking {
+    0% {
+        transform: translateX(0) rotate(0);
+    }
+
+    25% {
+        transform: translateX(-20px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translateX(20px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0);
+    }
+}
+
+@keyframes jumping {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
+}
+
+@keyframes waving {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(-15deg);
+    }
+
+    75% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+/* Estados do Octocat */
+.octocat.walking {
+    animation: walking 1s infinite;
+}
+
+.octocat.jumping {
+    animation: jumping 0.5s ease;
+}
+
+.octocat.waving {
+    animation: waving 0.5s ease;
+}
+
+/* Balão de fala */
+.speech-bubble {
+    position: absolute;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f6ff 100%);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #0d1117;
+    font-size: 14px;
+    max-width: 150px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform-origin: bottom center;
+    animation: floatBubble 0.3s ease-out;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #fff transparent;
+    margin-left: -10px;
+}
+
+.speech-bubble.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes floatBubble {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animações para o Octocat */
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+/* Animação quando encontra um usuário */
+.octocat.success {
+    animation: celebrate 1s ease;
+}
+
+@keyframes celebrate {
+    0% {
+        transform: scale(1) rotate(0);
+    }
+
+    25% {
+        transform: scale(1.2) rotate(-10deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    75% {
+        transform: scale(1.2) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* Animação quando há erro */
+.octocat.error {
+    animation: shake 0.5s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    .octocat {
+        width: 100px;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        max-width: 90%;
+        margin: 60px auto;
+        padding: 30px 20px;
+    }
+
+    .octocat-container {
+        top: -60px;
+        right: -45px;
+        /* Ajustado para dar mais espaço */
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .speech-bubble {
+        max-width: 120px;
+        font-size: 12px;
+    }
+
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .octocat {
+        width: 80px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px 15px;
+        margin: 40px auto;
+    }
+
+    .octocat-container {
+        top: -50px;
+        right: -35px;
+        /* Ajustado para dar mais espaço */
+    }
+
+    .octocat {
+        width: 80px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header i {
+        font-size: 36px;
+    }
+
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .search-box {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input[type="text"] {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    #result {
+        margin: 20px auto;
+    }
+
+    #result img {
+        width: 140px;
+    }
+
+    #result h2 {
+        font-size: 22px;
+    }
+
+    #result p {
+        font-size: 14px;
+    }
+
+    .speech-bubble {
+        max-width: 100px;
+        font-size: 11px;
+        padding: 8px;
+    }
+
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 6px;
+        /* Botão um pouco menor em telas pequenas */
+    }
+
+    .github-link,
+    .share-btn {
+        width: 100%;
+        /* Botões ocupam toda a largura em telas pequenas */
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 15px 10px;
+    }
+
+    .octocat-container {
+        top: -40px;
+        right: -15px;
+    }
+
+    .octocat {
+        width: 60px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    #result img {
+        width: 120px;
+    }
+}
+
+/* Orientação Paisagem em dispositivos móveis */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .octocat-container {
+        top: -35px;
+        right: -25px;
+    }
+
+    .octocat {
+        width: 70px;
+    }
+
+    .header {
+        margin-bottom: 20px;
+    }
+
+    #result {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        text-align: left;
+    }
+
+    #result img {
+        width: 100px;
+        margin: 0;
+    }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 600px;
+        /* Máximo em telas grandes */
+        padding: 40px;
+    }
+
+    .octocat {
+        width: 150px;
+    }
+
+    .header h1 {
+        font-size: 3em;
+    }
+
+    input[type="text"] {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+
+    #result img {
+        width: 200px;
+    }
+
+    #result h2 {
+        font-size: 32px;
+    }
+
+    #result p {
+        font-size: 18px;
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+.theme-toggle {
+    position: relative;
+    top: unset;
+    right: unset;
+    margin: 20px auto 0;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    font-size: 16px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px) rotate(0);
+    background: var(--accent-gradient);
+    color: white;
+    border-color: transparent;
+}
+
+.theme-toggle::before {
+    content: attr(data-mode);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.theme-toggle i {
+    font-size: 18px;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Adicione uma classe de suporte para verificar se o navegador suporta backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+
+    .container,
+    .stats,
+    #result {
+        background: var(--bg-secondary);
+    }
+}
+
+/* Estilo para os links sociais */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.profile-btn,
+.share-btn {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 180px;
+    justify-content: center;
+}
+
+.profile-btn:hover,
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 15px rgba(88, 166, 255, 0.4),
+        0 0 0 2px rgba(88, 166, 255, 0.2);
+}
+
+@media (max-width: 480px) {
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-btn,
+    .share-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+/* Octocat próximo ao botão de pesquisa */
+.octocat-container {
+    position: absolute;
+    top: 120px;
+    /* Ajustado para ficar próximo ao botão */
+    right: -40px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.octocat {
+    width: 90px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    height: auto;
+    transform-origin: bottom center;
+}
+
+/* Animações do Octocat */
+.octocat:hover {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .octocat-container {
+        top: 100px;
+        right: -30px;
+    }
+
+    .octocat {
+        width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .octocat-container {
+        top: 90px;
+        right: -20px;
+    }
+
+    .octocat {
+        width: 60px;
+    }
+}
+
+@media (max-width: 360px) {
+    .octocat-container {
+        top: 85px;
+        right: -15px;
+    }
+
+    .octocat {
+        width: 50px;
+    }
+}
