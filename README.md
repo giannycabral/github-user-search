@@ -128,7 +128,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 Regiane Cabral
 - [GitHub](https://github.com/giannycabral)
-- [LinkedIn](seu-linkedin)
+- [LinkedIn](https://linkedin.com/in/regiane-jesus/)
 
 ## 🙏 Agradecimentos
 
