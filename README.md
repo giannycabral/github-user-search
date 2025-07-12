@@ -2,6 +2,8 @@
 
 Uma aplicação web kawaii e interativa para buscar perfis de usuários do GitHub. Desenvolvida com um design fofo em tons de lilás e rosa, apresenta animações suaves, interações divertidas e um mascote Octocat animado.
 
+https://github.com/user-attachments/assets/a5244076-cc5c-495d-88fd-a6fb5d27dca1
+
 ## ✨ Funcionalidades
 
 - 🔎 Pesquisa de usuários do GitHub com feedback visual
