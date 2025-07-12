@@ -6,6 +6,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultDiv = document.getElementById("result");
   const octocat = document.querySelector(".octocat");
 
+  // Função para exibir a mensagem de boas-vindas
+  function displayWelcomeMessage() {
+    resultDiv.innerHTML = `
+      <div class="welcome-message">
+        <div class="welcome-icon">
+          <i class="fab fa-github"></i>
+        </div>
+        <h3>✨ Bem-vindo ao Pesquisador de Perfis GitHub! ✨</h3>
+        <p>Digite um nome de usuário do GitHub acima e clique em "Pesquisar" para descobrir:</p>
+        <ul>
+          <li>🔍 Detalhes do perfil</li>
+          <li>📚 Número de repositórios</li>
+          <li>👥 Seguidores e seguindo</li>
+        </ul>
+        <p class="welcome-tip">Dica: Clique no botão no canto superior esquerdo para alternar entre os temas claro e escuro!</p>
+      </div>
+    `;
+  }
+
+  // Exibir mensagem de boas-vindas ao carregar a página
+  displayWelcomeMessage();
+
   // Criar balão de fala
   const speechBubble = document.createElement("div");
   speechBubble.className = "speech-bubble";
@@ -51,9 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   octocat.addEventListener("mouseout", () => {
     octocat.style.transform = "scale(1) rotate(0)";
-  });
-
-  searchBtn.addEventListener("click", async () => {
+  });    searchBtn.addEventListener("click", async () => {
     const username = usernameInput.value.trim();
 
     if (!username) {
@@ -61,6 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
         '<p class="error-message">Por favor, digite um nome de usuário</p>';
       octocat.classList.add("error");
       setTimeout(() => octocat.classList.remove("error"), 500);
+      
+      // Restaurar mensagem de boas-vindas após o erro
+      setTimeout(() => {
+        displayWelcomeMessage();
+      }, 1500);
       return;
     }
 
@@ -147,6 +172,14 @@ document.addEventListener("DOMContentLoaded", () => {
         octocat.classList.remove("jumping", "walking", "error");
         speechBubble.classList.remove("visible");
       }, 2000);
+    }
+  });
+
+  // Permitir que o usuário pressione Enter para pesquisar
+  usernameInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      searchBtn.click();
     }
   });
 
