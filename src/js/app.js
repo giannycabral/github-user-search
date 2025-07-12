@@ -106,13 +106,13 @@ document.addEventListener("DOMContentLoaded", () => {
               <a href="https://github.com/${
                 data.login
               }" target="_blank" class="profile-btn">
-            <i class="fab fa-github"></i> Ver Perfil
+                <i class="fab fa-github"></i> Ver Perfil
               </a>
-                <button class="share-btn" onclick="shareProfile('${
-                  data.login
-                }')">
-                    <i class="fas fa-share-alt"></i> Compartilhar
-                </button>
+              <button class="share-btn" onclick="shareProfile('${
+                data.login
+              }')">
+                <i class="fas fa-share-alt"></i> Compartilhar
+              </button>
             </div>
         `;
 
@@ -224,6 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // Atualizar texto do botão de tema
 function updateThemeButton(theme) {
   const themeToggle = document.getElementById("theme-toggle");
+  if (!themeToggle) return; // Evita erro se o elemento não existir
+  
   const icon = theme === "light" ? "fa-moon" : "fa-sun";
   const text = theme === "light" ? "Modo Escuro" : "Modo Claro";
 
@@ -234,13 +236,19 @@ function updateThemeButton(theme) {
 // Atualizar ao carregar e ao mudar o tema
 document.addEventListener("DOMContentLoaded", () => {
   const currentTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", currentTheme);
   updateThemeButton(currentTheme);
 
-  document.getElementById("theme-toggle").addEventListener("click", () => {
-    const newTheme =
-      document.documentElement.getAttribute("data-theme") === "light"
-        ? "dark"
-        : "light";
-    updateThemeButton(newTheme);
-  });
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+      
+      // Salvar tema no localStorage
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+      updateThemeButton(newTheme);
+    });
+  }
 });
