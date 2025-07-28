@@ -164,7 +164,6 @@ Regiane Cabral
 - Comunidade Open Source pelas inspirações
 - Font Awesome pelos ícones estilosos
 - Octodex pelo adorável mascote Octocat
-- GitHub Copilot pela assistência no desenvolvimento
 
 ---
 
